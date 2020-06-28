@@ -10,12 +10,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ContactsTableComponent } from './contacts-table/contacts-table.component';
+import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     ContactsTableComponent,
+    ContactDetailComponent,
   ],
   imports: [
     BrowserModule,
