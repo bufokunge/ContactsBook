@@ -1,1 +1,8 @@
 <p>contacts-table works!</p>
+<button mat-button (click)="addContact(undefined)">Add customer</button>
+
+<ul class="contacts-table">
+  <li *ngFor="let contact of contacts | async">
+    {{contact.ssn + ' ' + contact.firstName + ' ' + contact.lastName}}
+  </li>
+</ul>

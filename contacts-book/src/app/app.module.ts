@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ContactsTableComponent } from './contacts-table/contacts-table.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
+import { ContactReducer } from "./contact.reducer";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ contacts: ContactReducer }, {}),
     MatToolbarModule
   ],
   providers: [],
