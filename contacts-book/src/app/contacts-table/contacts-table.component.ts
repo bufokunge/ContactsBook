@@ -7,6 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { CreateContactComponent } from "../create-contact/create-contact.component";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-contacts-table',
@@ -33,7 +34,8 @@ export class ContactsTableComponent implements OnInit {
     //this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private store: Store<{ contacts: {[ssn: number]: SimplifiedContact} }>, public dialog: MatDialog) {
+  constructor(private store: Store<{ contacts: {[ssn: number]: SimplifiedContact} }>, public dialog: MatDialog,
+              private router: Router) {
     this.contacts = store.pipe(select('contacts'));
   }
 
@@ -53,5 +55,11 @@ export class ContactsTableComponent implements OnInit {
     if (!contact) return;
 
     this.store.dispatch(new AddContact(contact));
+  }
+
+  showContactDetail(contactSsn: number) {
+    console.log('click', contactSsn);
+
+    this.router.navigateByUrl('contact/' + contactSsn);
   }
 }
