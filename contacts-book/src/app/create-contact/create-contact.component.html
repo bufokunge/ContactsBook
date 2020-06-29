@@ -2,31 +2,31 @@
   <p>Add new contact</p>
   <mat-form-field>
     <mat-label>First Name</mat-label>
-    <input matInput [(ngModel)]="contact.firstName">
+    <input matInput id="firstNameInput" [(ngModel)]="contact.firstName">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Last Name</mat-label>
-    <input matInput [(ngModel)]="contact.lastName">
+    <input matInput id="lastNameInput" [(ngModel)]="contact.lastName">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Social Security Number</mat-label>
-    <input matInput [(ngModel)]="contact.ssn">
+    <input matInput id="ssnInput" [(ngModel)]="contact.ssn">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Address</mat-label>
-    <input matInput [(ngModel)]="contact.address">
+    <input matInput id="addressInput" [(ngModel)]="contact.address">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Phone</mat-label>
-    <input matInput [(ngModel)]="contact.phone">
+    <input matInput id="phoneInput" [(ngModel)]="contact.phone">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Email</mat-label>
-    <input matInput [(ngModel)]="contact.email">
+    <input matInput id="emailInput" [(ngModel)]="contact.email">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Description</mat-label>
-    <textarea matInput
+    <textarea matInput id="descInput"
               cdkTextareaAutosize
               #autosize="cdkTextareaAutosize"
               cdkAutosizeMinRows="1"
@@ -38,7 +38,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-stroked-button color="primary" type="submit" [mat-dialog-close]="contact">Submit</button>
-  <button mat-stroked-button type="reset" (click)="onCancel()">Cancel</button>
+  <button mat-stroked-button id="submitContactBtn" color="primary" type="submit" [mat-dialog-close]="contact">Submit</button>
+  <button mat-stroked-button id="cancelDialogBtn" type="reset" (click)="onCancel()">Cancel</button>
   <button mat-stroked-button (click)="onSetMockData()">Set Mock Data</button>
 </div>

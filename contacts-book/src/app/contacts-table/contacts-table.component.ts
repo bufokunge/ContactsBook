@@ -24,7 +24,7 @@ export class ContactsTableComponent implements OnInit {
 
   openNewContactDialog(): void {
     let contact: Contact = {
-      address: "", description: "", email: "", firstName: "", lastName: "", phone: "", ssn: 0
+      address: "", description: "", email: "", firstName: "", lastName: "", phone: "", ssn: undefined
     };
 
     const dialogRef = this.dialog.open(CreateContactComponent, {width: '250px', data: contact});

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContactsTableComponent } from './contacts-table.component';
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
-import { By } from "@angular/platform-browser";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 
 describe('ContactsTableComponent', () => {
   let component: ContactsTableComponent;
@@ -14,10 +14,12 @@ describe('ContactsTableComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ContactsTableComponent],
       providers: [
+        {provide: MatDialogRef, useValue: {}},
         //StoreModule.forRoot({ contacts: ContactReducer }),
         provideMockStore({initialState}),
       ],
       imports: [
+        MatDialogModule
         //StoreModule.forRoot({ contacts: ContactReducer }),
       ]
     }).compileComponents();
@@ -32,20 +34,4 @@ describe('ContactsTableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  /*it('should add user to table when add is clicked', () => {
-    clickByCSS('#addContactBtn');
-
-    expect(true).toBe(true);
-  });*/
-
-  /**
-   * From https://ngrx.io/guide/store/testing
-   * @param selector
-   */
-  function clickByCSS(selector: string) {
-    const debugElement = fixture.debugElement.query(By.css(selector));
-    const el: HTMLElement = debugElement.nativeElement;
-    el.click();
-    fixture.detectChanges();
-  }
 });
