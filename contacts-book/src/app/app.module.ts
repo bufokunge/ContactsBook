@@ -19,6 +19,8 @@ import { ContactsTableComponent } from './contacts-table/contacts-table.componen
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 import { ContactReducer } from "./contact.reducer";
 import { CreateContactComponent } from './create-contact/create-contact.component';
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { CreateContactComponent } from './create-contact/create-contact.componen
     MatDialogModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
