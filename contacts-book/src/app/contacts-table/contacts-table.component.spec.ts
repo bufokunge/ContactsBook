@@ -3,6 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContactsTableComponent } from './contacts-table.component';
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { DataSource } from "@angular/cdk/collections";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 describe('ContactsTableComponent', () => {
   let component: ContactsTableComponent;
@@ -19,7 +23,10 @@ describe('ContactsTableComponent', () => {
         provideMockStore({initialState}),
       ],
       imports: [
-        MatDialogModule
+        MatDialogModule,
+        MatTableModule,
+        MatPaginatorModule,
+        BrowserAnimationsModule
         //StoreModule.forRoot({ contacts: ContactReducer }),
       ]
     }).compileComponents();

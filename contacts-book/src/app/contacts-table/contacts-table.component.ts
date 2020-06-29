@@ -25,8 +25,10 @@ export class ContactsTableComponent implements OnInit {
   ngOnInit() {
     this.contacts.subscribe(data => {
       console.log(data);
-      this.dataSource.data = Object.values(data);
-      this.dataSource.paginator = this.paginator;
+      if (data) {
+        this.dataSource.data = Object.values(data);
+        this.dataSource.paginator = this.paginator;
+      }
     });
     //this.dataSource.paginator = this.paginator;
   }
