@@ -1,5 +1,5 @@
 <p>contacts-table works!</p>
-<button mat-button id="addContactBtn" (click)="addContact(undefined)">Add customer</button>
+<button mat-button id="addContactBtn" (click)="openNewContactDialog()">New Contact</button>
 
 <ul class="contacts-table">
   <li *ngFor="let contact of contacts | async | keyvalue">

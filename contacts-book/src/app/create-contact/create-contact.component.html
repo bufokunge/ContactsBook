@@ -1,0 +1,42 @@
+<div mat-dialog-content>
+  <p>Add new contact</p>
+  <mat-form-field>
+    <mat-label>First Name</mat-label>
+    <input matInput [(ngModel)]="contact.firstName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Last Name</mat-label>
+    <input matInput [(ngModel)]="contact.lastName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Social Security Number</mat-label>
+    <input matInput [(ngModel)]="contact.ssn">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Address</mat-label>
+    <input matInput [(ngModel)]="contact.address">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Phone</mat-label>
+    <input matInput [(ngModel)]="contact.phone">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="contact.email">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"
+              [(ngModel)]="contact.description">
+
+    </textarea>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="contact">Add Contact</button>
+</div>
