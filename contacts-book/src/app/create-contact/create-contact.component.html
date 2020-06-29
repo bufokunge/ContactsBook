@@ -38,5 +38,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="contact">Add Contact</button>
+  <button mat-stroked-button color="primary" type="submit" [mat-dialog-close]="contact">Submit</button>
+  <button mat-stroked-button type="reset" (click)="onCancel()">Cancel</button>
+  <button mat-stroked-button (click)="onSetMockData()">Set Mock Data</button>
 </div>
