@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
-import {Contact, SimplifiedContact} from "../contact";
+import { Contact, SimplifiedContact } from "../contact";
 import { select, Store } from "@ngrx/store";
-import {AddContact} from "../contact.action";
+import { AddContact } from "../contact.action";
+import { mockContactFactory } from "../contact.mocks";
 
 @Component({
   selector: 'app-contacts-table',
@@ -11,9 +12,9 @@ import {AddContact} from "../contact.action";
 })
 export class ContactsTableComponent implements OnInit {
 
-  contacts: Observable<SimplifiedContact[]>;
+  contacts: Observable<{[ssn: number]: SimplifiedContact}>;
 
-  constructor(private store: Store<{ contacts: SimplifiedContact[] }>) {
+  constructor(private store: Store<{ contacts: {[ssn: number]: SimplifiedContact} }>) {
     this.contacts = store.pipe(select('contacts'));
   }
 
@@ -21,18 +22,15 @@ export class ContactsTableComponent implements OnInit {
   }
 
   addContact(contact: Contact) {
-    console.log('add contact', contact);
+    // TODO: add contact passed as parameter
 
-    const c: Contact = {
-      firstName: 'first',
-      lastName: 'last',
-      ssn: 1,
-      address: 'address',
-      phone: '0123',
-      email: 'test@mail.com',
-      description: 'some text',
-    };
+    const mockContactPromise = mockContactFactory(1);
 
-    this.store.dispatch(new AddContact(c));
+    mockContactPromise.then(data => {
+      const mockContact = data['contacts'][0]
+      console.log('add contact', mockContact);
+
+      this.store.dispatch(new AddContact(mockContact));
+    });
   }
 }
