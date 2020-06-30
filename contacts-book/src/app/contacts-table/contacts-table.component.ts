@@ -59,6 +59,8 @@ export class ContactsTableComponent implements OnInit {
   }
 
   onChangePage(event) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
     this.setPageData();
   }
 

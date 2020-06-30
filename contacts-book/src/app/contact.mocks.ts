@@ -8,7 +8,7 @@ const contact = {
     faker: 'name.lastName'
   },
   ssn: {
-    faker: 'random.number'
+    incrementalId: true,
   },
 
   address: {
@@ -19,7 +19,7 @@ const contact = {
   },
   email: {
     function: function() {
-      return this.firstName + '@' + this.lastName + '.com';
+      return this.object.firstName + '@' + this.object.lastName + '.com';
     }
   },
   phone: {
