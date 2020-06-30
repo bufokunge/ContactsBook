@@ -8,6 +8,14 @@ export function ContactReducer(state: {[ssn: string] : SimplifiedContact} = init
   switch (action.type) {
     case ContactActions.ADD_CONTACT:
       return {...state, [action.payload.ssn]: action.payload};
+    case ContactActions.ADD_CONTACT_ARRAY:
+      let tmpContacts = {...state};
+
+      action.payload.forEach(contact => {
+        tmpContacts[contact.ssn] = contact;
+      });
+
+      return tmpContacts;
     default:
       return state;
   }

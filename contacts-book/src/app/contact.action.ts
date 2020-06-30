@@ -1,5 +1,5 @@
-import {Action} from "@ngrx/store";
-import {Contact} from "./contact";
+import { Action } from "@ngrx/store";
+import { Contact } from "./contact";
 
 /**
  * Tutorial:
@@ -7,11 +7,20 @@ import {Contact} from "./contact";
  */
 
 export const ADD_CONTACT = '[Contacts Table Component] Add Contact';
+export const ADD_CONTACT_ARRAY = '[Contacts Table Component] Add Contact Array';
 
 export class AddContact implements Action {
   readonly type = ADD_CONTACT;
 
-  constructor(public payload: Contact) {}
+  constructor(public payload: Contact) {
+  }
 }
 
-export type Actions = AddContact; // e.g. add other actions: | EditContact | RemoveContact
+export class AddContactArray implements Action {
+  readonly type = ADD_CONTACT_ARRAY;
+
+  constructor(public payload: Contact[]) {
+  }
+}
+
+export type Actions = AddContact | AddContactArray;

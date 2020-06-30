@@ -26,4 +26,23 @@ describe('ContactReducer', () => {
       expect(state[mockContact.ssn]).toBe(mockContact);
     });
   });
+
+  it ('should add array of contacts', () => {
+    const initialState = Reducer.initialState;
+    const number = 3
+    const mockContactPromise = mockContactFactory(number);
+
+    return mockContactPromise.then(data => {
+      const mockContacts = data['contacts'];
+
+      const action = new Actions.AddContactArray(mockContacts);
+      const state = Reducer.ContactReducer(initialState, action);
+
+      expect(Object.keys(state).length).toBe(Object.keys(initialState).length + number);
+      mockContacts.forEach(mock => {
+        expect(Object.keys(state)).toContain(mock.ssn + '');
+        expect(state[mock.ssn]).toBe(mock);
+      });
+    });
+  });
 });

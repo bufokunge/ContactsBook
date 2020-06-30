@@ -9,10 +9,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { Router } from "@angular/router";
 import { mockContactFactory } from "../contact.mocks";
+import { DataService } from "../services/data.service";
+import { FormsModule } from "@angular/forms";
+import { MatInputModule } from "@angular/material/input";
 
 describe('ContactsTableComponent', () => {
   let component: ContactsTableComponent;
   let fixture: ComponentFixture<ContactsTableComponent>;
+  let dataService: DataService;
 
   const initialState = {};
 
@@ -22,6 +26,12 @@ describe('ContactsTableComponent', () => {
     }
   }
 
+  class MockDataService {
+    getPageData(pageIndex: number, pageSize: number) {
+      return {};
+    };
+  }
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,12 +39,15 @@ describe('ContactsTableComponent', () => {
       providers: [
         {provide: MatDialogRef, useValue: {}},
         {provide: Router, useClass: MockRouter},
+        {provide: DataService, useClass: MockDataService},
         provideMockStore({initialState}),
       ],
       imports: [
         MatDialogModule,
         MatTableModule,
         MatPaginatorModule,
+        MatInputModule,
+        FormsModule,
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes([])
       ]
@@ -42,6 +55,7 @@ describe('ContactsTableComponent', () => {
 
     fixture = TestBed.createComponent(ContactsTableComponent);
     component = fixture.debugElement.componentInstance;
+    dataService = TestBed.inject(DataService);
     fixture.detectChanges();
   }));
 
@@ -64,17 +78,19 @@ describe('ContactsTableComponent', () => {
     const mockContactPromise = mockContactFactory(pageSize + 1);
 
     return mockContactPromise.then(data => {
-      component.dataSource.data = data['contacts'];
+      component.dataSource.data = data['contacts'].slice(0, pageSize - 1);
+
       fixture.detectChanges();
       let rowsNr = fixture.debugElement.nativeElement.querySelector('tbody').children.length;
 
-      expect(rowsNr).toBe(pageSize);
+      expect(rowsNr).toBe(pageSize - 1);
 
-      component.dataSource.data = data['contacts'].slice(0, pageSize - 1);
+      component.dataSource.data = data['contacts'];
+
       fixture.detectChanges();
       rowsNr = fixture.debugElement.nativeElement.querySelector('tbody').children.length;
 
-      expect(rowsNr).toBe(pageSize - 1);
+      expect(rowsNr).toBe(pageSize + 1);
     });
 
   });

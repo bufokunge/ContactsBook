@@ -24,19 +24,24 @@ export class ContactsTableComponent implements OnInit {
   mockContacts: number;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  pageIndex: number = 0;
+  pageSize: number = 5;
+  length: number = 0;
 
   constructor(public dialog: MatDialog, private data: DataService, private router: Router) {
-    this.contacts = this.data.contactsObservable;
-
-    this.contacts.subscribe(data => {
-      if (data) {
-        this.dataSource.data = Object.values(data);
-      }
-    });
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    this.setPageData();
+  }
+
+  setPageData() {
+    const response = this.data.getPageData(this.paginator.pageIndex, this.paginator.pageSize);
+
+    this.dataSource.data = response.data;
+    this.pageIndex = response.pageIndex;
+    this.pageSize = response.pageSize;
+    this.length = response.length;
   }
 
   openNewContactDialog(): void {
@@ -52,24 +57,20 @@ export class ContactsTableComponent implements OnInit {
   }
 
   showContactDetail(contactSsn: number) {
-    console.log('click', contactSsn);
-
     this.router.navigateByUrl('contact/' + contactSsn);
   }
 
   onChangePage(event) {
-    console.log('change page', event.pageIndex, event.pageSize);
+    this.setPageData();
   }
 
   createMockData() {
     const mockContactPromise = mockContactFactory(+this.mockContacts);
 
-    return mockContactPromise.then(data => {
-      console.log('mock data created');
-
-      data['contacts'].forEach(contact => {
-        this.data.addContact(contact);
-      });
+    mockContactPromise.then(data => {
+      console.log('mock data created', data['contacts']);
+      this.data.addContactArray(data['contacts']);
+      this.setPageData();
     });
 
   }

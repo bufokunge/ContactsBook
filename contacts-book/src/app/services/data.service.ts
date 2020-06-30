@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { Contact, SimplifiedContact } from "../contact";
 import { select, Store } from "@ngrx/store";
-import { AddContact } from "../contact.action";
+import { AddContact, AddContactArray } from "../contact.action";
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +26,21 @@ export class DataService {
   }
 
   getContactBySsn(ssn: number): Contact {
-    console.log(this.contacts);
-    console.log(ssn);
-
     if (this.contacts && this.contacts[ssn]) {
       return (this.contacts[ssn] as Contact);
     }
 
     return undefined;
+  }
+
+  getPageData(page: number, pageSize: number): any {
+    const pageItems = Object.values(this.contacts).slice(page * pageSize, page * pageSize + pageSize);
+
+    return {pageIndex: page, pageSize: pageSize, data: pageItems, length: Object.values(this.contacts).length};
+  }
+
+  addContactArray(contacts: Contact[]) {
+    if (!contacts || contacts.length <= 0) return;
+    this.store.dispatch(new AddContactArray(contacts));
   }
 }
