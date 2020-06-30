@@ -6,6 +6,7 @@ import { provideMockStore } from "@ngrx/store/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DataService } from "../services/data.service";
+import { FormsModule } from "@angular/forms";
 
 describe('ContactDetailComponent', () => {
   let component: ContactDetailComponent;
@@ -18,14 +19,15 @@ describe('ContactDetailComponent', () => {
         DataService,
         provideMockStore({initialState})
       ],
-      declarations: [ ContactDetailComponent ],
+      declarations: [ContactDetailComponent],
       imports: [
         MatInputModule,
+        FormsModule,
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes([])
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
