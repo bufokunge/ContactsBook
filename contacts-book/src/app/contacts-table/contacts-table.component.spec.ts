@@ -27,8 +27,11 @@ describe('ContactsTableComponent', () => {
   }
 
   class MockDataService {
+    contacts = {};
+
     getPageData(pageIndex: number, pageSize: number) {
-      return {};
+      const pageItems = Object.values(this.contacts).slice(pageIndex * pageSize, pageIndex * pageSize + pageSize);
+      return {data: pageItems, length: Object.values(this.contacts).length};
     };
   }
 
@@ -74,23 +77,27 @@ describe('ContactsTableComponent', () => {
   }));
 
   it('should have as many rows as contacts or paginator page size', () => {
-    const pageSize = component.paginator.pageSize;
+    const pageSize = component.pageSize;
     const mockContactPromise = mockContactFactory(pageSize + 1);
 
     return mockContactPromise.then(data => {
-      component.dataSource.data = data['contacts'].slice(0, pageSize - 1);
+      // test with less items than page size
+      dataService.contacts = data['contacts'].slice(0, pageSize - 1);
+      component.setPageData();
 
       fixture.detectChanges();
       let rowsNr = fixture.debugElement.nativeElement.querySelector('tbody').children.length;
 
       expect(rowsNr).toBe(pageSize - 1);
 
-      component.dataSource.data = data['contacts'];
+      // test with more items than page size
+      dataService.contacts = data['contacts'];
+      component.setPageData();
 
       fixture.detectChanges();
       rowsNr = fixture.debugElement.nativeElement.querySelector('tbody').children.length;
 
-      expect(rowsNr).toBe(pageSize + 1);
+      expect(rowsNr).toBe(pageSize);
     });
 
   });

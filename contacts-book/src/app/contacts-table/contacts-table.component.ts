@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 import { Contact, SimplifiedContact } from "../contact";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateContactComponent } from "../create-contact/create-contact.component";
-import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { DataService } from "../services/data.service";
@@ -23,7 +22,6 @@ export class ContactsTableComponent implements OnInit {
 
   mockContacts: number;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   pageIndex: number = 0;
   pageSize: number = 5;
   length: number = 0;
@@ -36,12 +34,12 @@ export class ContactsTableComponent implements OnInit {
   }
 
   setPageData() {
-    const response = this.data.getPageData(this.paginator.pageIndex, this.paginator.pageSize);
+    const response = this.data.getPageData(this.pageIndex, this.pageSize);
 
-    this.dataSource.data = response.data;
-    this.pageIndex = response.pageIndex;
-    this.pageSize = response.pageSize;
-    this.length = response.length;
+    if (response) {
+      this.dataSource.data = response.data;
+      this.length = response.length;
+    }
   }
 
   openNewContactDialog(): void {
@@ -65,10 +63,11 @@ export class ContactsTableComponent implements OnInit {
   }
 
   createMockData() {
+    if (this.mockContacts === undefined || this.mockContacts === null) return;
+
     const mockContactPromise = mockContactFactory(+this.mockContacts);
 
     mockContactPromise.then(data => {
-      console.log('mock data created', data['contacts']);
       this.data.addContactArray(data['contacts']);
       this.setPageData();
     });

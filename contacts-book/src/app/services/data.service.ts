@@ -9,10 +9,10 @@ import { AddContact, AddContactArray } from "../contact.action";
 })
 export class DataService {
 
-  contactsObservable: Observable<{[ssn: number]: SimplifiedContact}>;
-  contacts: {[ssn: number]: SimplifiedContact};
+  contactsObservable: Observable<{ [ssn: number]: SimplifiedContact }>;
+  contacts: { [ssn: number]: SimplifiedContact };
 
-  constructor(private store: Store<{ contacts: {[ssn: number]: SimplifiedContact} }>) {
+  constructor(private store: Store<{ contacts: { [ssn: number]: SimplifiedContact } }>) {
     this.contactsObservable = store.pipe(select('contacts'));
     this.contactsObservable.subscribe(data => {
       this.contacts = data;
@@ -36,7 +36,7 @@ export class DataService {
   getPageData(page: number, pageSize: number): any {
     const pageItems = Object.values(this.contacts).slice(page * pageSize, page * pageSize + pageSize);
 
-    return {pageIndex: page, pageSize: pageSize, data: pageItems, length: Object.values(this.contacts).length};
+    return {data: pageItems, length: Object.values(this.contacts).length};
   }
 
   addContactArray(contacts: Contact[]) {
