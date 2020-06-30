@@ -7,6 +7,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { DataService } from "../services/data.service";
+import { mockContactFactory } from "../contact.mocks";
 
 @Component({
   selector: 'app-contacts-table',
@@ -19,6 +20,8 @@ export class ContactsTableComponent implements OnInit {
 
   dataSource = new MatTableDataSource<SimplifiedContact>()
   displayedColumns: string[] = ['ssn', 'firstName', 'lastName'];
+
+  mockContacts: number;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -56,5 +59,18 @@ export class ContactsTableComponent implements OnInit {
 
   onChangePage(event) {
     console.log('change page', event.pageIndex, event.pageSize);
+  }
+
+  createMockData() {
+    const mockContactPromise = mockContactFactory(+this.mockContacts);
+
+    return mockContactPromise.then(data => {
+      console.log('mock data created');
+
+      data['contacts'].forEach(contact => {
+        this.data.addContact(contact);
+      });
+    });
+
   }
 }

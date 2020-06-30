@@ -24,3 +24,12 @@
 
   <mat-paginator (page)="onChangePage($event)" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
+
+<div class="mock-data-generate-container">
+  <mat-form-field>
+    <mat-label># Contacts</mat-label>
+    <input matInput id="mockInput" [(ngModel)]="mockContacts">
+  </mat-form-field>
+  <button mat-button id="createMockDataBtn" (click)="createMockData()">Create Mock Data</button>
+
+</div>
