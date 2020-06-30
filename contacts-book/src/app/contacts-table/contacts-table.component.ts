@@ -22,20 +22,18 @@ export class ContactsTableComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  ngOnInit() {
-
-  }
-
   constructor(public dialog: MatDialog, private data: DataService, private router: Router) {
     this.contacts = this.data.contactsObservable;
-    console.log(this.data);
 
     this.contacts.subscribe(data => {
       if (data) {
         this.dataSource.data = Object.values(data);
-        this.dataSource.paginator = this.paginator;
       }
     });
+  }
+
+  ngOnInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   openNewContactDialog(): void {
@@ -54,5 +52,9 @@ export class ContactsTableComponent implements OnInit {
     console.log('click', contactSsn);
 
     this.router.navigateByUrl('contact/' + contactSsn);
+  }
+
+  onChangePage(event) {
+    console.log('change page', event.pageIndex, event.pageSize);
   }
 }

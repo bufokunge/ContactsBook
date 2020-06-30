@@ -1,9 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContactDetailComponent } from './contact-detail.component';
-import { RouterModule } from "@angular/router";
 import { MatInputModule } from "@angular/material/input";
 import { provideMockStore } from "@ngrx/store/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { DataService } from "../services/data.service";
 
 describe('ContactDetailComponent', () => {
   let component: ContactDetailComponent;
@@ -13,13 +15,14 @@ describe('ContactDetailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
+        DataService,
         provideMockStore({initialState})
       ],
       declarations: [ ContactDetailComponent ],
       imports: [
-        RouterModule.forRoot([]),
         MatInputModule,
-
+        BrowserAnimationsModule,
+        RouterTestingModule.withRoutes([])
       ]
     })
     .compileComponents();

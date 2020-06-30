@@ -1,1 +1,42 @@
 <p>contact-detail works!</p>
+<div class="contact-detail-container">
+  <div class="contact-detail-fields">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput id="firstNameInput" [disabled]="true" [(ngModel)]="contact.firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput id="lastNameInput" [disabled]="true" [(ngModel)]="contact.lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Social Security Number</mat-label>
+      <input matInput id="ssnInput" [disabled]="true" [(ngModel)]="contact.ssn">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <input matInput id="addressInput" [disabled]="true" [(ngModel)]="contact.address">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input matInput id="phoneInput" [disabled]="true" [(ngModel)]="contact.phone">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput id="emailInput" [disabled]="true" [(ngModel)]="contact.email">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput
+                id="descInput"
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                [disabled]="true"
+                [(ngModel)]="contact.description">
+
+    </textarea>
+    </mat-form-field>
+  </div>
+</div>

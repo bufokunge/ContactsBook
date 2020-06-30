@@ -1,0 +1,13 @@
+.contact-detail-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-detail-fields {
+  width: 50%;
+  min-width: 250px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+}

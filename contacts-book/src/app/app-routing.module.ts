@@ -4,9 +4,9 @@ import { ContactsTableComponent } from "./contacts-table/contacts-table.componen
 import {ContactDetailComponent} from "./contact-detail/contact-detail.component";
 
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: '', component: ContactsTableComponent},
-  {path: 'contact/:id', component: ContactDetailComponent}
+  {path: 'contact/:ssn', component: ContactDetailComponent}
 ];
 
 @NgModule({

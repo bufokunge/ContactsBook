@@ -26,7 +26,10 @@ export class DataService {
   }
 
   getContactBySsn(ssn: number): Contact {
-    if (this.contacts[ssn]) {
+    console.log(this.contacts);
+    console.log(ssn);
+
+    if (this.contacts && this.contacts[ssn]) {
       return (this.contacts[ssn] as Contact);
     }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from "../contact";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { DataService } from "../services/data.service";
 
 @Component({
@@ -10,17 +10,19 @@ import { DataService } from "../services/data.service";
 })
 export class ContactDetailComponent implements OnInit {
 
-  contact: Contact;
+  contact: Contact = {address: "", description: "", email: "", firstName: "", lastName: "", phone: "", ssn: 0};
   ssn: number;
 
-  constructor(private route: ActivatedRoute, private data: DataService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private data: DataService) { }
 
   ngOnInit(): void {
     this.ssn = +this.route.snapshot.paramMap.get('ssn');
-    /*this.contact = this.data.getContactBySsn(this.ssn);
-    console.log(this.contact);
-    /*this.ssn = +this.route.snapshot.paramMap.get("contact");
-    console.log(this.ssn);*/
+    this.contact = this.data.getContactBySsn(this.ssn);
+
+    if (!this.contact) {
+      this.contact = {address: "", description: "", email: "", firstName: "", lastName: "", phone: "", ssn: 0}
+      this.router.navigateByUrl('');
+    }
   }
 
 }
