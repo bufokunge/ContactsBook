@@ -13,7 +13,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 
-
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ContactsTableComponent } from './contacts-table/contacts-table.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
