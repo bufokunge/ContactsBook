@@ -1,8 +1,9 @@
 <div class="contacts-table-container">
   <div class="contacts-table-title">
-    <h1>ContactsBook</h1>
+    <h1>Contact Overview</h1>
     <button mat-stroked-button color="primary" id="addContactBtn" (click)="openNewContactDialog()"
-      matTooltip="Add new contact">New Contact</button>
+            matTooltip="Add new contact">New Contact
+    </button>
   </div>
 
   <div class="contacts-table">
@@ -24,7 +25,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns" style="position: sticky "></tr>
-      <tr mat-row (click)="showContactDetail(row.ssn)" *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row [routerLink]="'/contact/' + row.ssn" *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
     <mat-paginator (page)="onChangePage($event)" [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="length"
@@ -34,9 +35,12 @@
   <div class="mock-data-generate-container">
     <mat-form-field>
       <mat-label># Contacts</mat-label>
-      <input matInput type="number" id="mockInput" matTooltip="Number of mock contacts to generate" [(ngModel)]="mockContacts">
+      <input matInput type="number" id="mockInput" matTooltip="Number of mock contacts to generate"
+             [(ngModel)]="mockContacts">
     </mat-form-field>
-    <button mat-stroked-button color="primary" id="createMockDataBtn" matTooltip="Generate mock contact data" (click)="createMockData()">Create Mock Data</button>
+    <button mat-stroked-button color="primary" id="createMockDataBtn" matTooltip="Generate mock contact data"
+            (click)="createMockData()">Create Mock Data
+    </button>
 
   </div>
 </div>

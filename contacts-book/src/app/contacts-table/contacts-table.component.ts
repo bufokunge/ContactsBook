@@ -4,7 +4,6 @@ import { Contact, SimplifiedContact } from "../contact";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateContactComponent } from "../create-contact/create-contact.component";
 import { MatTableDataSource } from "@angular/material/table";
-import { Router } from "@angular/router";
 import { DataService } from "../services/data.service";
 import { mockContactFactory } from "../contact.mocks";
 
@@ -15,7 +14,7 @@ import { mockContactFactory } from "../contact.mocks";
 })
 export class ContactsTableComponent implements OnInit {
 
-  contacts: Observable<{[ssn: number]: SimplifiedContact}>;
+  contacts: Observable<{ [ssn: number]: SimplifiedContact }>;
 
   dataSource = new MatTableDataSource<SimplifiedContact>()
   displayedColumns: string[] = ['ssn', 'firstName', 'lastName'];
@@ -26,7 +25,7 @@ export class ContactsTableComponent implements OnInit {
   pageSize: number = 5;
   length: number = 0;
 
-  constructor(public dialog: MatDialog, private data: DataService, private router: Router) {
+  constructor(public dialog: MatDialog, private data: DataService) {
   }
 
   ngOnInit() {
@@ -52,10 +51,6 @@ export class ContactsTableComponent implements OnInit {
     dialogRef.afterClosed().subscribe(c => {
       this.data.addContact(c);
     })
-  }
-
-  showContactDetail(contactSsn: number) {
-    this.router.navigateByUrl('contact/' + contactSsn);
   }
 
   onChangePage(event) {
