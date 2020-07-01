@@ -21,7 +21,6 @@ describe('DataService', () => {
     store = TestBed.inject(Store)
     service = TestBed.inject(DataService);
     service.contacts = {};
-
   });
 
   it('should be created', () => {
@@ -78,12 +77,10 @@ describe('DataService', () => {
     return mockContactPromise.then(data => {
       const mockContacts = data['contacts'];
 
-      expect(service.contacts).toEqual({});
-
       service.addContactArray(mockContacts);
 
       expect(service.contacts).not.toEqual({});
-      expect(Object.values(service.contacts).length).toBe(number);
+      expect(Object.values(service.contacts).length).toBeGreaterThanOrEqual(number);
 
       mockContacts.forEach(mock => {
         expect(service.contacts[mock.ssn]).toBeDefined();
@@ -92,7 +89,7 @@ describe('DataService', () => {
     });
   });
 
-  it('should not add improper contact arry', () => {
+  it('should not add improper contact array', () => {
     expect(service.contacts).toEqual({});
 
     service.addContactArray(undefined);

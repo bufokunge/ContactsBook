@@ -8,9 +8,10 @@ const contact = {
     faker: 'name.lastName'
   },
   ssn: {
-    incrementalId: true,
+    function: function () {
+      return Math.floor(Math.random() * 1000000);
+    }
   },
-
   address: {
     faker: 'address.country'
   },

@@ -20,6 +20,7 @@ import { ContactReducer } from "./contact.reducer";
 import { CreateContactComponent } from './create-contact/create-contact.component';
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

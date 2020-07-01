@@ -1,7 +1,41 @@
+.contacts-table-container {
+  padding: 16px;
+}
+
 table {
   width: 100%;
+
+  tr.mat-row:hover {
+    background-color: rgba(0,0,0,.03);
+    cursor: pointer;
+  }
+  tr.mat-row:active {
+    background-color: rgba(63,81,181,.15);
+    cursor: pointer;
+  }
+}
+
+.contacts-table-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  button {
+    margin: 0 0 16px;
+  }
 }
 
 .contacts-table {
-  width: 75%;
+  width: 100%;
+}
+
+.mock-data-generate-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 24px;
+
+  button {
+    margin: 0 0 1.25em 16px;
+  }
 }

@@ -1,36 +1,42 @@
-<button mat-button id="addContactBtn" (click)="openNewContactDialog()">New Contact</button>
+<div class="contacts-table-container">
+  <div class="contacts-table-title">
+    <h1>ContactsBook</h1>
+    <button mat-stroked-button color="primary" id="addContactBtn" (click)="openNewContactDialog()"
+      matTooltip="Add new contact">New Contact</button>
+  </div>
 
-<div class="contacts-table">
-  <table mat-table [dataSource]="dataSource">
+  <div class="contacts-table">
+    <table mat-table [dataSource]="dataSource">
 
-    <ng-container matColumnDef="ssn">
-      <th mat-header-cell *matHeaderCellDef> SSN </th>
-      <td mat-cell *matCellDef="let contact"> {{contact.ssn}} </td>
-    </ng-container>
+      <ng-container matColumnDef="ssn">
+        <th mat-header-cell *matHeaderCellDef> SSN</th>
+        <td mat-cell *matCellDef="let contact"> {{contact.ssn}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> First Name </th>
-      <td mat-cell *matCellDef="let contact"> {{contact.firstName}} </td>
-    </ng-container>
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> First Name</th>
+        <td mat-cell *matCellDef="let contact"> {{contact.firstName}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
-      <td mat-cell *matCellDef="let contact"> {{contact.lastName}} </td>
-    </ng-container>
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Last Name</th>
+        <td mat-cell *matCellDef="let contact"> {{contact.lastName}} </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row (click)="showContactDetail(row.ssn)" *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" style="position: sticky "></tr>
+      <tr mat-row (click)="showContactDetail(row.ssn)" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
-  <mat-paginator (page)="onChangePage($event)" [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="length"
-                 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-</div>
+    <mat-paginator (page)="onChangePage($event)" [pageSize]="pageSize" [pageIndex]="pageIndex" [length]="length"
+                   [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
 
-<div class="mock-data-generate-container">
-  <mat-form-field>
-    <mat-label># Contacts</mat-label>
-    <input matInput id="mockInput" [(ngModel)]="mockContacts">
-  </mat-form-field>
-  <button mat-button id="createMockDataBtn" (click)="createMockData()">Create Mock Data</button>
+  <div class="mock-data-generate-container">
+    <mat-form-field>
+      <mat-label># Contacts</mat-label>
+      <input matInput type="number" id="mockInput" matTooltip="Number of mock contacts to generate" [(ngModel)]="mockContacts">
+    </mat-form-field>
+    <button mat-stroked-button color="primary" id="createMockDataBtn" matTooltip="Generate mock contact data" (click)="createMockData()">Create Mock Data</button>
 
+  </div>
 </div>
