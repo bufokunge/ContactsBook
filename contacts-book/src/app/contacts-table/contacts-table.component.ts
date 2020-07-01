@@ -49,8 +49,8 @@ export class ContactsTableComponent implements OnInit {
 
     const dialogRef = this.dialog.open(CreateContactComponent, {width: '250px', data: contact});
 
-    dialogRef.afterClosed().subscribe(data => {
-      this.data.addContact(data);
+    dialogRef.afterClosed().subscribe(c => {
+      this.data.addContact(c);
     })
   }
 
