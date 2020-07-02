@@ -1,4 +1,4 @@
-import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContactsTableComponent } from './contacts-table.component';
 import { provideMockStore } from "@ngrx/store/testing";
@@ -14,20 +14,18 @@ import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { of } from "rxjs";
 import { Contact } from "../contact";
+import { ContactDetailComponent } from "../contact-detail/contact-detail.component";
+import { Location } from "@angular/common";
 
 describe('ContactsTableComponent', () => {
   let component: ContactsTableComponent;
   let fixture: ComponentFixture<ContactsTableComponent>;
   let dataService: DataService;
+  let location: Location;
+  let router: Router;
   let dialog: MatDialog;
 
   const initialState = {};
-
-  class MockRouter {
-    navigateByUrl(url: string) {
-      return url;
-    }
-  }
 
   class MockDataService {
     contacts = {};
@@ -43,7 +41,6 @@ describe('ContactsTableComponent', () => {
 
   class MockDialog {
     open() {
-      console.log('open mock dialog?')
     };
   }
 
@@ -52,7 +49,6 @@ describe('ContactsTableComponent', () => {
       declarations: [ContactsTableComponent],
       providers: [
         {provide: MatDialogRef, useClass: MockDialog},
-        {provide: Router, useClass: MockRouter},
         {provide: DataService, useClass: MockDataService},
         provideMockStore({initialState}),
       ],
@@ -63,13 +59,16 @@ describe('ContactsTableComponent', () => {
         MatInputModule,
         FormsModule,
         BrowserAnimationsModule,
-        RouterTestingModule.withRoutes([])
-      ]
+        RouterTestingModule.withRoutes([{path: 'contact/:ssn', component: ContactDetailComponent}]),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ContactsTableComponent);
     component = fixture.debugElement.componentInstance;
     dataService = TestBed.inject(DataService);
+
+    router = TestBed.inject(Router);
+    location = TestBed.inject(Location);
     dialog = TestBed.inject(MatDialog);
     fixture.detectChanges();
   }));
@@ -78,14 +77,22 @@ describe('ContactsTableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should redirect with contact ssn', inject([Router], (router: Router) => {
-    const spy = spyOn(router, 'navigateByUrl');
-    const ssn = 5463;
+  it('should redirect with contact ssn when row is clicked', async(() => {
+    fixture.ngZone.run(() => {
+      const mockContactPromise = mockContactFactory(1);
 
-    component.showContactDetail(ssn);
+      return mockContactPromise.then(data => {
+        dataService.contacts = data['contacts'];
+        component.setPageData();
+        fixture.detectChanges();
 
-    const url = spy.calls.first().args[0];
-    expect(url).toBe('contact/' + ssn);
+
+        fixture.debugElement.nativeElement.querySelector('tbody').children[0].click();
+        fixture.whenStable().then(() => {
+          expect(location.path()).toEqual('/contact/' + +fixture.debugElement.nativeElement.querySelector('tbody').children[0].children[0].textContent);
+        });
+      });
+    });
   }));
 
   it('should have as many rows as contacts or paginator page size', () => {

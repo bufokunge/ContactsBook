@@ -11,7 +11,8 @@ describe('CreateContactComponent', () => {
   let fixture: ComponentFixture<CreateContactComponent>;
 
   const dialogMock = {
-    close: () => { }
+    close: () => {
+    }
   };
 
   beforeEach(async(() => {
@@ -19,9 +20,11 @@ describe('CreateContactComponent', () => {
       declarations: [CreateContactComponent],
       providers: [
         {provide: MatDialogRef, useValue: dialogMock},
-        {provide: MAT_DIALOG_DATA, useValue: {
+        {
+          provide: MAT_DIALOG_DATA, useValue: {
             address: "", description: "", email: "", firstName: "", lastName: "", phone: "", ssn: 0
-          }}
+          }
+        }
       ],
       imports: [
         MatDialogModule,
