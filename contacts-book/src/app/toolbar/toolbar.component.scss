@@ -1,3 +1,6 @@
 span:hover {
   cursor: pointer;
 }
+span:focus {
+  outline: none;
+}

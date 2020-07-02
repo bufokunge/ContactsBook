@@ -46,10 +46,11 @@ export class ContactsTableComponent implements OnInit {
       address: "", description: "", email: "", firstName: "", lastName: "", phone: "", ssn: undefined
     };
 
-    const dialogRef = this.dialog.open(CreateContactComponent, {width: '250px', data: contact});
+    const dialogRef = this.dialog.open(CreateContactComponent, {data: contact});
 
     dialogRef.afterClosed().subscribe(c => {
       this.data.addContact(c);
+      this.setPageData();
     })
   }
 

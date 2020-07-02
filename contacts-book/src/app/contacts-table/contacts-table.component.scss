@@ -13,6 +13,9 @@ table {
     background-color: rgba(63,81,181,.15);
     cursor: pointer;
   }
+  tr.mat-row:focus {
+    outline: none;
+  }
 }
 
 .contacts-table-title {

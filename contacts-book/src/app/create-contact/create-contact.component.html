@@ -1,44 +1,48 @@
-<div mat-dialog-content>
-  <p>Add new contact</p>
-  <mat-form-field>
-    <mat-label>First Name</mat-label>
-    <input matInput id="firstNameInput" [(ngModel)]="contact.firstName">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Last Name</mat-label>
-    <input matInput id="lastNameInput" [(ngModel)]="contact.lastName">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Social Security Number</mat-label>
-    <input matInput id="ssnInput" [(ngModel)]="contact.ssn">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Address</mat-label>
-    <input matInput id="addressInput" [(ngModel)]="contact.address">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Phone</mat-label>
-    <input matInput id="phoneInput" [(ngModel)]="contact.phone">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input matInput id="emailInput" [(ngModel)]="contact.email">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Description</mat-label>
-    <textarea matInput id="descInput"
-              cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize"
-              cdkAutosizeMinRows="1"
-              cdkAutosizeMaxRows="5"
-              [(ngModel)]="contact.description">
+<div class="create-contact-container">
+  <h1>Add new contact</h1>
+  <div mat-dialog-content class="create-contact-content">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput id="firstNameInput" [(ngModel)]="contact.firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput id="lastNameInput" [(ngModel)]="contact.lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Social Security Number</mat-label>
+      <input matInput type="number" id="ssnInput" [(ngModel)]="contact.ssn">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <input matInput id="addressInput" [(ngModel)]="contact.address">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input matInput id="phoneInput" [(ngModel)]="contact.phone">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput id="emailInput" [(ngModel)]="contact.email">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput id="descInput"
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                [(ngModel)]="contact.description">
 
     </textarea>
-  </mat-form-field>
-</div>
+    </mat-form-field>
+  </div>
 
-<div mat-dialog-actions>
-  <button mat-stroked-button id="submitContactBtn" color="primary" type="submit" [mat-dialog-close]="contact">Submit</button>
-  <button mat-stroked-button id="cancelDialogBtn" type="reset" (click)="onCancel()">Cancel</button>
-  <button mat-stroked-button (click)="onSetMockData()">Set Mock Data</button>
+  <div mat-dialog-actions>
+    <button mat-stroked-button id="submitContactBtn" color="primary" type="submit" [mat-dialog-close]="contact">Submit
+    </button>
+    <button mat-stroked-button id="cancelDialogBtn" type="reset" (click)="onCancel()">Cancel</button>
+    <button mat-stroked-button (click)="onSetMockData()">Set Mock Data</button>
+  </div>
+
 </div>

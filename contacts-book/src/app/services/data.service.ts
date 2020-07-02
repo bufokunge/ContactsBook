@@ -20,7 +20,7 @@ export class DataService {
   }
 
   addContact(contact: Contact) {
-    if (!contact) return;
+    if (!contact || contact.ssn === undefined) return;
 
     this.store.dispatch(new AddContact(contact));
   }
